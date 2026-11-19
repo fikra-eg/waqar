@@ -1946,6 +1946,22 @@
         }
       }
 
+
+      .featured-grid { margin-top: 4px; }
+      .collection-cta-wrap { display:flex; justify-content:center; margin-top:42px; }
+      .collection-cta {
+        display:inline-flex; align-items:center; justify-content:center; gap:22px;
+        min-height:54px; padding:0 30px; border:1px solid var(--gold);
+        color:var(--ink); text-decoration:none; font:600 11px Montserrat,sans-serif;
+        letter-spacing:.16em; transition:background .25s,color .25s,transform .25s;
+      }
+      .collection-cta:hover { background:var(--gold); color:#fff; transform:translateY(-2px); }
+      .collection-cta span { font-size:18px; line-height:1; }
+      @media(max-width:600px) {
+        #featured .head { align-items:flex-start; flex-direction:column; }
+        .collection-cta-wrap { margin-top:30px; }
+        .collection-cta { width:100%; padding:0 16px; gap:12px; font-size:10px; letter-spacing:.12em; }
+      }
     </style>
   </head>
   <body>
@@ -1956,7 +1972,7 @@
         </button>
         <a class="logo" href="#top">WAQAR<small>MEN'S FRAGRANCES</small></a>
         <nav>
-          <a href="#shop">Shop</a
+          <a href="collection.html">Shop</a
           ><a href="#families">Fragrance Families</a
           ><a href="#bestsellers">Best Sellers<span class="badge">POPULAR</span></a
           ><a href="#policies">Shipping &amp; Returns</a>
@@ -1987,14 +2003,14 @@
             <h1 dir="ltr">WAQAR</h1>
             <span class="hero-line" aria-hidden="true"></span>
             <p>A PRESENCE THAT PRECEDES YOU</p>
-            <a class="btn" href="#shop">SHOP NOW</a>
+            <a class="btn" href="collection.html">SHOP NOW</a>
           </div>
         </div>
       </section>
 
       <div class="trust-bg">
         <div class="wrap trust">
-          <span><b>FREE SHIPPING</b> on orders over EGP 5,000</span
+          <span><b>FREE SHIPPING</b> on orders over EGP 2,000</span
           ><span><b>QUALITY FIRST</b> in every detail</span
           ><span><b>CASH ON DELIVERY</b> across Egypt</span
           ><span><b>14-DAY EXCHANGE</b></span>
@@ -2046,13 +2062,16 @@
         </div>
       </section>
 
-      <section id="shop" style="background: var(--surf)">
+      <section id="featured" style="background: var(--surf)">
         <div class="wrap">
           <div class="head">
-            <h2>SHOP ALL</h2>
-            <div class="chips" id="chips"></div>
+            <h2>EXPLORE WAQAR</h2>
+            <p>Discover a selection from our fragrance collection.</p>
           </div>
-          <div class="grid" id="grid"></div>
+          <div class="grid featured-grid" id="featuredGrid"></div>
+          <div class="collection-cta-wrap">
+            <a class="collection-cta" href="collection.html">EXPLORE THE FULL COLLECTION <span aria-hidden="true">→</span></a>
+          </div>
         </div>
       </section>
 
@@ -2087,7 +2106,7 @@
               <h3>Shipping</h3>
               <p>
                 التوصيل خلال ٢–٤ أيام عمل داخل مصر. الشحن مجاني للطلبات التي
-                تزيد قيمتها عن ٥٬٠٠٠ جنيه.
+                تزيد قيمتها عن ٢٬٠٠٠ جنيه.
               </p>
             </div>
             <div>
@@ -2111,7 +2130,7 @@
           </p>
         </div>
         <div>
-          <a href="#shop">Shop All</a
+          <a href="collection.html">Shop All</a
           ><a href="#bestsellers">Best Sellers</a
           ><a href="#policies">Shipping &amp; Returns</a>
         </div>
@@ -2332,13 +2351,13 @@
         var l = P.filter(function (p) {
           return state.filter == "All" || p.f == state.filter;
         });
-        $("grid").innerHTML = l.map(card).join("");
+        if ($("grid")) $("grid").innerHTML = l.map(card).join("");
         var fs = ["All"].concat(
           FAM.map(function (f) {
             return f[0];
           }),
         );
-        $("chips").innerHTML = fs
+        if ($("chips")) $("chips").innerHTML = fs
           .map(function (f) {
             return (
               '<button class="' +
@@ -2354,7 +2373,8 @@
       }
       function renderAll() {
         renderGrid();
-        $("track").innerHTML = P.slice(0, 5).map(card).join("");
+        if ($("track")) $("track").innerHTML = P.slice(0, 5).map(card).join("");
+        if ($("featuredGrid")) $("featuredGrid").innerHTML = P.slice(0, 4).map(card).join("");
         $("wn").textContent = state.wish.length;
         $("cn").textContent = state.cart.reduce(function (a, i) {
           return a + i.q;
@@ -2423,7 +2443,7 @@
           })
           .join("");
         var t = total(),
-          left = Math.max(0, 5000 - t);
+          left = Math.max(0, 2000 - t);
         var msg =
           "مرحبًا، أرغب في طلب:\n" +
           state.cart
@@ -2441,7 +2461,7 @@
             ? "يتبقى " + egp(left) + " للحصول على شحن مجاني"
             : "مبروك! حصلت على شحن مجاني") +
           '</div><div class="bar"><i style="width:' +
-          Math.min(100, t / 50) +
+          Math.min(100, t / 20) +
           '%"></i></div><div style="display:flex;justify-content:space-between;margin-bottom:14px"><span>Subtotal</span><b>' +
           egp(t) +
           '</b></div><a class="full wa" target="_blank" rel="noopener" href="https://wa.me/' +
@@ -2484,13 +2504,13 @@
             '</span><button data-x="p">+</button></div></div><button class="full" data-x="buy" style="width:100%">BUY NOW</button><div class="pn"><div><span>FRAGRANCE FAMILY</span>' +
             familyLabel(p.f) +
             '</div><div><span>TOP NOTES</span><b dir="rtl">برغموت، زعفران</b></div><div><span>HEART NOTES</span><b dir="rtl">ورد، خشب الأرز</b></div><div><span>BASE NOTES</span><b dir="rtl">عود، عنبر، مسك</b></div><div><span>LONGEVITY</span><b dir="rtl">٨–١٠ ساعات</b></div></div><div class="ship">' +
-            (price(p, s) * q >= 5000
+            (price(p, s) * q >= 2000
               ? "هذا الطلب مؤهل للشحن المجاني"
               : "يتبقى " +
-                egp(5000 - price(p, s) * q) +
+                egp(2000 - price(p, s) * q) +
                 " للحصول على شحن مجاني") +
             '</div><div class="bar"><i style="width:' +
-            Math.min(100, (price(p, s) * q) / 50) +
+            Math.min(100, (price(p, s) * q) / 20) +
             '%"></i></div></div></div><div class="sticky"><div><b>' +
             p.n +
             '</b><div class="pr" style="text-align:left"><b>' +
@@ -2558,7 +2578,7 @@
         if (fm) {
           state.filter = fm.dataset.fam;
           renderGrid();
-          $("shop").scrollIntoView({ behavior: "smooth" });
+          if ($("shop")) $("shop").scrollIntoView({ behavior: "smooth" });
           return;
         }
         var m = e.target.closest("[data-m]");
@@ -2601,7 +2621,7 @@
         );
       };
       $("menuBtn").onclick = function () {
-        $("shop").scrollIntoView({ behavior: "smooth" });
+        window.location.href = "collection.html";
       };
       $("fam").innerHTML = FAM.map(function (f) {
         return (
