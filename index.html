@@ -1876,6 +1876,76 @@
         .trust span { font-size: 9px; }
       }
 
+    
+      /* Local-brand pricing presentation and perfectly matched Day / Night bottle comparison */
+      .cmp {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0 !important;
+        aspect-ratio: 16 / 8 !important;
+        max-width: 1080px !important;
+        border: 1px solid #3a3023 !important;
+        background: #0b0908 !important;
+      }
+      .compare-scene {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+      }
+      .compare-scene img {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        max-height: none !important;
+        padding: clamp(22px, 5vw, 58px) clamp(18px, 5vw, 54px) 62px !important;
+        object-fit: contain !important;
+        object-position: center center !important;
+        transform: none !important;
+        filter: drop-shadow(0 22px 26px rgba(0,0,0,.42)) !important;
+      }
+      .compare-day {
+        background:
+          radial-gradient(ellipse at 50% 44%, rgba(212,168,90,.20), transparent 58%),
+          linear-gradient(145deg, #3a2d1c 0%, #17120d 76%) !important;
+      }
+      .compare-day img {
+        filter: brightness(1.12) sepia(.10) saturate(.88) drop-shadow(0 22px 26px rgba(0,0,0,.38)) !important;
+      }
+      .compare-night {
+        background:
+          radial-gradient(ellipse at 50% 44%, rgba(104,113,137,.16), transparent 58%),
+          linear-gradient(145deg, #171a22 0%, #08090d 76%) !important;
+      }
+      .compare-night img {
+        filter: brightness(.78) saturate(.78) contrast(1.08) drop-shadow(0 22px 26px rgba(0,0,0,.48)) !important;
+      }
+      .compare-scene + .compare-scene {
+        border-left: 1px solid rgba(212,168,90,.55) !important;
+      }
+      .compare-label {
+        bottom: 18px !important;
+        font-size: 12px !important;
+        letter-spacing: .2em !important;
+      }
+      @media (max-width: 600px) {
+        .cmp {
+          aspect-ratio: 4 / 5 !important;
+        }
+        .compare-scene img {
+          padding: 18px 5% 48px !important;
+          transform: none !important;
+        }
+        .compare-label {
+          bottom: 12px !important;
+          font-size: 10px !important;
+        }
+      }
+
     </style>
   </head>
   <body>
@@ -1965,11 +2035,11 @@
           </div>
           <div class="cmp" id="cmp">
             <article class="compare-scene compare-day">
-              <img src="https://chamonixveil.com/assets/cologne-bottle-1-CALOKsEu.jpg" alt="Fragrance for daytime" loading="lazy">
+              <img src="https://www.fischersund.com/cdn/shop/products/FISCHERSUND_ondark_54_bottle_02.jpg?v=1678708256&width=3000" alt="Same WAQAR bottle in a daytime lighting setup" loading="lazy">
               <span class="compare-label">DAY</span>
             </article>
             <article class="compare-scene compare-night">
-              <img src="https://i.pinimg.com/originals/0f/33/f0/0f33f021c85750690a01d792e79d247e.jpg" alt="Fragrance for the evening" loading="lazy">
+              <img src="https://www.fischersund.com/cdn/shop/products/FISCHERSUND_ondark_54_bottle_02.jpg?v=1678708256&width=3000" alt="Same WAQAR bottle in an evening lighting setup" loading="lazy">
               <span class="compare-label">NIGHT</span>
             </article>
           </div>
@@ -2072,64 +2142,64 @@
           id: "amber-noir",
           n: "Amber Noir",
           f: "Oud & Amber",
-          p: 4999,
-          o: 5499,
+          p: 650,
+          o: 750,
           c: ["#2b1a10", "#8a5a22"],
         },
         {
           id: "oud-royale",
           n: "Oud Royale",
           f: "Oud & Amber",
-          p: 11950,
-          o: 12650,
+          p: 850,
+          o: 950,
           c: ["#141414", "#c79a3f"],
         },
         {
           id: "black-saffron",
           n: "Black Saffron",
           f: "Spicy",
-          p: 8600,
-          o: 9000,
+          p: 750,
+          o: 850,
           c: ["#1a1a1f", "#7a1f2e"],
         },
         {
           id: "golden-leather",
           n: "Golden Leather",
           f: "Woody",
-          p: 15950,
-          o: 17299,
+          p: 850,
+          o: 950,
           c: ["#1b140c", "#d9b45b"],
         },
         {
           id: "cedar-smoke",
           n: "Cedar & Smoke",
           f: "Woody",
-          p: 3650,
-          o: 3999,
+          p: 600,
+          o: 700,
           c: ["#22201c", "#6b7a64"],
         },
         {
           id: "midnight-musk",
           n: "Midnight Musk",
           f: "Spicy",
-          p: 2800,
-          o: 3500,
+          p: 600,
+          o: 700,
           c: ["#12172a", "#8aa0d8"],
         },
         {
           id: "aqua-titan",
           n: "Aqua Titan",
           f: "Fresh",
-          p: 2450,
-          o: 2700,
+          p: 550,
+          o: 650,
           c: ["#0d2a3a", "#5fc3d6"],
         },
         {
           id: "vetiver-sport",
           n: "Vetiver Sport",
           f: "Fresh",
-          p: 1950,
-          o: 2200,
+          p: 550,
+          o: 650,
           c: ["#12281d", "#7fc48d"],
         },
       ];
